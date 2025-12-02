@@ -9,5 +9,14 @@ namespace BlogWebsite.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ActionName("Add")]
+        public IActionResult SubmitTag()
+        {
+            var name = Request.Form["name"];
+            var displayname = Request.Form["diplayName"];
+
+            return View("Add");
+        }
     }
 }
