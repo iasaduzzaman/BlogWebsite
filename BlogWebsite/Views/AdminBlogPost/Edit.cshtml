@@ -1,16 +1,23 @@
-﻿@model BlogWebsite.Models.ViewModels.AddBlogPostRequest
+﻿@model BlogWebsite.Models.ViewModels.EditBlogPostRequest
 @{
 }
 <div class="bg-secondary bg-opacity-10 py-2">
     <div class="container">
-        <h1>Add New BlogPost - Admin Functionality</h1>
+        <h1>Edit the BlogPost - Admin Functionality</h1>
     </div>
 </div>
-<div class="container py-2">
-    <form method="post">
+
+<div class=" container py-5">
+    @if (Model != null)
+    {
+        <div class="mb-3">
+            <label class="form-label">Id</label>
+            <input type="text" id="id" class="form-control" asp-for="Id" readonly />
+        </div>
+
         <div class="mb-3">
             <label class="form-label">Heading</label>
-            <input type="text" class="form-control" id="heading" asp-for="Heading"/>
+            <input type="text" class="form-control" id="heading" asp-for="Heading" />
         </div>
 
         <div class="mb-3">
@@ -20,7 +27,7 @@
 
         <div class="mb-3">
             <label class="form-label">Content</label>
-            <textarea class="form-control" id="content" asp-for="Content" ></textarea>
+            <textarea class="form-control" id="content" asp-for="Content"></textarea>
         </div>
 
         <div class="mb-3">
@@ -57,14 +64,14 @@
 
         <div class="mb-3">
             <label class="form-label">Tags</label>
-            <select class="form-select" 
-                asp-items= "@Model.Tags"
-                asp-for= "SelectedTags">
+            <select class="form-select"
+                    asp-items="@Model.Tags"
+                    asp-for="SelectedTags">
             </select>
         </div>
-
-        <div class="mb-3">
-            <button type="submit" class="btn btn-success">Save</button>
-        </div>
-    </form>
+    }
+    else
+    {
+        <p>No Blog Post found!</p>
+    }
 </div>
