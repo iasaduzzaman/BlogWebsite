@@ -109,5 +109,64 @@ namespace BlogWebsite.Controllers
             //pass data to view
             return View(null);
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditBlogPostRequest editBlogPostRequest)
+        {
+            //map view to model back to the domain model
+            var blogPostDomainModel = new BlogPost
+            {
+                 Id = editBlogPostRequest.Id,
+                 Heading = editBlogPostRequest.Heading,
+                 PageTitle = editBlogPostRequest.PageTitle,
+                 Content = editBlogPostRequest.Content,
+                 ShortDescription = editBlogPostRequest.ShortDescription,
+                 FeaturedImageUrl = editBlogPostRequest.FeaturedImageUrl,
+                 UrlHandle = editBlogPostRequest.UrlHandle,
+                 PublishedDate = editBlogPostRequest.PublishedDate,
+                 Author = editBlogPostRequest.Author,   
+                 Visible = editBlogPostRequest.Visible,
+            };
+
+            //Map Tags into domain Model
+
+            var selectedTags = new List<Tag>();
+            foreach(var selectedTag in editBlogPostRequest.SelectedTags)
+            {
+                if (Guid.TryParse(selectedTag, out var Tag))
+                {
+                    var foundTag = await tagRepository.GetAsync(Tag);
+                    if (foundTag != null)
+                    {
+                        selectedTags.Add(foundTag);
+                    }
+                }
+            }
+            blogPostDomainModel.Tags = selectedTags;
+             
+            //submit information to repository to update 
+             var updatedBlog = await blogPostRepository.UpdateAsync(blogPostDomainModel);
+            if (updatedBlog != null)
+            {
+                //show success notifications
+                return RedirectToAction("Edit");
+            }
+            //show error notiifcation
+
+            return RedirectToAction("Edit");
+            //redirect to Get
+        }
+        public async Task<IActionResult> Delete(EditBlogPostRequest editBlogPostRequest)
+        {
+            //Talk to repository to delete this blog post and tags
+            var deletedBlogPost = await blogPostRepository.DeleteAsync(editBlogPostRequest.Id);
+            
+            if(deletedBlogPost != null)
+            {
+                //show Success notification
+                return RedirectToAction("List");
+            }
+            //error notifications
+            return RedirectToAction("Edit", new { id = editBlogPostRequest.Id});
+        }
     }
 }
