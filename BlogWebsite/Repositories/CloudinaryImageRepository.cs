@@ -29,7 +29,7 @@ namespace BlogWebsite.Repositories
             var uploadResult = await client.UploadAsync(uploadParams);
             if (uploadResult != null && uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return uploadResult.SecureUri.ToString();
+                return uploadResult.SecureUrl.ToString();
             }
             return null;
         }

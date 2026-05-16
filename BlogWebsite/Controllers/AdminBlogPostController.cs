@@ -64,6 +64,7 @@ namespace BlogWebsite.Controllers
              blogPost.Tags = selectedTags;
 
             await blogPostRepository.AddAsync(blogPost);
+            @TempData["success"] = "The Post has been created Successfuly";
             return RedirectToAction("Add");
         }
         [HttpGet]
@@ -148,6 +149,7 @@ namespace BlogWebsite.Controllers
             if (updatedBlog != null)
             {
                 //show success notifications
+                @TempData["success"] = "The BlogPost has been Updated Successfuly";
                 return RedirectToAction("Edit");
             }
             //show error notiifcation
@@ -163,9 +165,11 @@ namespace BlogWebsite.Controllers
             if(deletedBlogPost != null)
             {
                 //show Success notification
+                @TempData["success"] = "The BlogPost has been deleted Successfuly";
                 return RedirectToAction("List");
             }
             //error notifications
+            @TempData["error"] = "The BlogPost has not been deleted";
             return RedirectToAction("Edit", new { id = editBlogPostRequest.Id});
         }
     }
