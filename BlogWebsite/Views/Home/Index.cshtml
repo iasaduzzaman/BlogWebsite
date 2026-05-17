@@ -1,8 +1,85 @@
-﻿@{
+﻿@model List<BlogWebsite.Models.Domain.BlogPost>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row align-items-center py-5">
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3" style="font-family: 'Playfair Display', Georgia, serif; color:#1a1208">
+                <em style="font-style: italic; color: #c8402a">Speak</em> through your words.
+            </h1>
+            <p class="lead">
+                Welcome to BlogSpace a modern platform for discovering inspiring articles, tech insights, programming tutorials, and creative stories. Explore fresh content, learn new ideas, and stay connected with a community of passionate writers and readers.
+            </p>
+        </div>
+        <div class="col-12 col-lg-6">
+            <img src="https://plus.unsplash.com/premium_photo-1720744786849-a7412d24ffbf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmxvZ3dlYnNpdGV8ZW58MHx8MHx8fDA%3D" 
+              alt="BlogSpace - Dev Blogs" class="d-block mx-lg-auto img-fluid" width="300"/>
+        </div>
+    </div>   
+</div>
+
+<div class="container py-5">
+
+    <div class="row justify-content-between">
+
+        <div class="col-lg-8">
+
+            <!-- Section Title -->
+            <h3 class="mb-4 fw-bold" style="color:#7a6f5e;">
+                Featured Stories
+            </h3>
+
+            @if (Model != null && Model.Any())
+            {
+                foreach (var blogPost in Model)
+                {
+                    <div class="card border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
+
+                        <!-- Image -->
+                        <img src="@blogPost.FeaturedImageUrl"
+                             alt="@blogPost.Heading"
+                             class="card-img-top"
+                             style="object-fit: cover;" />
+
+                        <!-- Body -->
+                        <div class="card-body p-4">
+
+                            <!-- Heading -->
+                            <h4 class="fw-bold mb-2">
+                                @blogPost.Heading
+                            </h4>
+
+                            <!-- Meta Info -->
+                            <p class="text-muted small mb-3">
+                                <span class="me-2"> Author: @blogPost.Author</span><br />
+                                 Published: @blogPost.PublishedDate.ToShortDateString()
+                            </p>
+                            <p class="mb-4">
+                                @foreach(var tag in blogPost.Tags)
+                                {
+                                    <span class="badge bg-secondary me-1">@tag.name</span>
+                                }
+                            </p>
+                            <!-- Description -->
+                            <p class="mb-3" style="line-height:1.7;">
+                                @blogPost.ShortDescription
+                            </p>
+
+                            <!-- Button -->
+                            <a class="btn btn-outline-primary px-4">
+                                Read More
+                            </a>
+
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+
 </div>
