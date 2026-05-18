@@ -69,8 +69,12 @@
                             </p>
 
                             <!-- Button -->
-                            <a class="btn btn-outline-primary px-4">
-                                Read More
+                            <a class="btn btn-outline-danger"
+                               asp-area=""
+                               asp-controller="Blogs"
+                               asp-action="Index"
+                               asp-route-urlHandle="@blogPost.UrlHandle"
+                               >Read More
                             </a>
 
                         </div>

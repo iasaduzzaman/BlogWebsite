@@ -18,7 +18,10 @@ namespace BlogWebsite.Controllers
 
         public async Task<IActionResult> Index()
         {
+            //getting all blogpost
             var BlogPost = await blogPostRepository.GetAllAsync();
+             
+            //getting all tags
 
 
             return View(BlogPost);
