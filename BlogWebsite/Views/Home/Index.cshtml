@@ -1,4 +1,4 @@
-﻿@model List<BlogWebsite.Models.Domain.BlogPost>
+﻿@model BlogWebsite.Models.ViewModels.HomeViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -21,6 +21,22 @@
     </div>   
 </div>
 
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-6">
+            @if(Model != null && Model.Tags.Any())
+            {
+                @foreach(var tag in Model.Tags)
+                {
+                    <span class="badge bg-black me-1">
+                        @tag.name
+                    </span>
+                }
+            }
+        </div>
+        </div>
+    </div>
+
 <div class="container py-5">
 
     <div class="row justify-content-between">
@@ -32,9 +48,9 @@
                 Featured Stories
             </h3>
 
-            @if (Model != null && Model.Any())
+            @if (Model != null && Model.BlogPosts.Any())
             {
-                foreach (var blogPost in Model)
+                foreach (var blogPost in Model.BlogPosts)
                 {
                     <div class="card border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
 
