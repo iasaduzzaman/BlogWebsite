@@ -5,7 +5,7 @@ namespace BlogWebsite.Data
 {
     public class BlogDbContext : DbContext
     {
-        public BlogDbContext(DbContextOptions option) : base(option)
+        public BlogDbContext(DbContextOptions<BlogDbContext> option) : base(option)
         {
 
         }
