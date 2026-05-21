@@ -2,11 +2,13 @@
 using BlogWebsite.Interfaces;
 using BlogWebsite.Models.Domain;
 using BlogWebsite.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogWebsite.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminTagsController : Controller
     {
         private readonly ITagRepository tagRepository;
@@ -21,6 +23,7 @@ namespace BlogWebsite.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddTagRequest addTagRequest)

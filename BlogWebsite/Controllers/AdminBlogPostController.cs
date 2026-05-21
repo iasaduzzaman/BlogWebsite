@@ -2,11 +2,13 @@
 using BlogWebsite.Models.Domain;
 using BlogWebsite.Models.ViewModels;
 using BlogWebsite.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogWebsite.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminBlogPostController : Controller
     {
         private readonly ITagRepository tagRepository;
