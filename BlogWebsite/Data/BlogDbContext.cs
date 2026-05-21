@@ -7,9 +7,9 @@ namespace BlogWebsite.Data
     {
         public BlogDbContext(DbContextOptions<BlogDbContext> option) : base(option)
         {
-
         }
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<BlogPostLike> BlogPostLike { get; set; }
     }
 }
