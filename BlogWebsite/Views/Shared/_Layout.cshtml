@@ -20,7 +20,7 @@
 
 </head>
 <body style="background:#f5f0e8">
-    <header>
+    <header class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-custom-beige border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand text-black font-playfair" asp-area="" asp-controller="Home" asp-action="Index"><em style="color: #c8402a">BLOG</em>WEBSITE</a>
@@ -81,6 +81,15 @@
                     <div class="d-flex align-items-center">
                         @if (signInManager.IsSignedIn(User))
                         {
+                            <div class="me-3 text-dark">
+                                <i class="bi bi-pencil-square"></i> 
+                                <a class="text-dark bg-custom-beige"
+                                   asp-area=""
+                                   asp-controller=""
+                                   asp-action="">
+                                    Write a Blog
+                                </a>
+                            </div>
                             <div class="me-3 text-dark">
                                 @User?.Identity?.Name
                             </div>
